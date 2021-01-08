@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
+import React  from 'react'
+import {BrowserRouter as Router ,Route,Switch} from 'react-router-dom'
+import ContextGlobal from './context/ContextGlobal'
+
+import Home from './components/Home'
+import EditUser from './components/EditUser'
+import ListUsers from './components/ListUsers'
+import AddUser from './components/AddUser'
 
 function App() {
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ContextGlobal>
+        
+      <Router>
+      
+      
+      <Switch>
+        <Route path='/' exact render={(props)=> <><Home urlLink='/adduser' textLink='Add User' /><ListUsers /></>}/>
+        <Route path='/edit/:id' exact component={EditUser}/>
+        <Route path='/adduser' component={AddUser}/>
+      </Switch>
+      </Router>
+      
+      </ContextGlobal>
+
+
     </div>
   );
 }
